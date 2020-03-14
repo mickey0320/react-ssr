@@ -1,0 +1,36 @@
+{
+  "name": "react-ssr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev:build:server": "webpack -w --config webpack.server.config.js",
+    "dev:start:server": "nodemon -w build --exec node build/app.server.bundle.js",
+    "dev:build:client": "webpack -w --config webpack.client.config.js",
+    "dev": "npm-run-all --parallel dev:**"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
+    "babel-loader": "^8.0.6",
+    "eslint": "^6.8.0",
+    "i": "^0.3.6",
+    "nodemon": "^2.0.2",
+    "npm": "^6.14.2",
+    "react": "^16.13.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-merge": "^4.2.2",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0",
+    "react-dom": "^16.13.0"
+  }
+}
