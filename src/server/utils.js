@@ -1,18 +1,22 @@
 import React from "react"
 import { renderToString } from "react-dom/server"
 import { StaticRouter as Router } from "react-router-dom"
+import { Provider } from "react-redux"
 
 import routes from "../routes"
 import Header from "../components/Header"
+import { getStore } from "../store"
 
 export function render(ctx) {
   function App() {
     return (
       <div className="app">
-        <Router location={ctx.url} context={{}}>
-          <Header></Header>
-          {routes()}
-        </Router>
+        <Provider store={getStore()}>
+          <Router location={ctx.url} context={{}}>
+            <Header></Header>
+            {routes()}
+          </Router>
+        </Provider>
       </div>
     )
   }
