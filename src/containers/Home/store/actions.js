@@ -7,11 +7,10 @@ function changeNewList(newList) {
     data: newList
   }
 }
-
 export function getHomeList() {
-  return dispatch => {
+  return (dispatch, state, axios) => {
     return axios
-      .get("http://47.95.113.63/ssr/api/news.json?secret=PP87ANTIPIRATE")
+      .get("/api/news.json?secret=PP87ANTIPIRATE")
       .then(res => {
         return dispatch(changeNewList(res.data.data))
       })

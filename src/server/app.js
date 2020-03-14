@@ -1,6 +1,7 @@
 import Koa from "koa"
 import koaRouter from "koa-router"
 import koaStatic from "koa-static"
+import proxy from "koa2-proxy-middleware"
 import { matchRoutes } from "react-router-config"
 
 import { render } from "./utils"
@@ -20,6 +21,17 @@ router.get("*", async ctx => {
   await Promise.all(promises)
   ctx.body = render(ctx, store)
 })
+
+app.use(
+  proxy({
+    targets: {
+      "/api/(.*)": {
+        target: "http://47.95.113.63/ssr",
+        changeOrigin: true
+      }
+    }
+  })
+)
 app.use(koaStatic("./dist"))
 app.use(router.routes())
 
