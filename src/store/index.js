@@ -10,5 +10,12 @@ const reducer = {
 function getStore() {
   return createStore(combineReducers(reducer), applyMiddleware(thunk))
 }
+function getClientStore(defaultState) {
+  return createStore(
+    combineReducers(reducer),
+    defaultState,
+    applyMiddleware(thunk)
+  )
+}
 
-export { getStore }
+export { getStore, getClientStore }

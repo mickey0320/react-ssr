@@ -29,4 +29,8 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
+Home.loadData = function(store) {
+  return store.dispatch(getHomeList())
+}
+
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

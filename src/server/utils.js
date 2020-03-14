@@ -1,20 +1,21 @@
 import React from "react"
 import { renderToString } from "react-dom/server"
-import { StaticRouter as Router } from "react-router-dom"
+import { StaticRouter as Router, Route } from "react-router-dom"
 import { Provider } from "react-redux"
 
 import routes from "../routes"
 import Header from "../components/Header"
-import { getStore } from "../store"
 
-export function render(ctx) {
+export function render(ctx, store) {
   function App() {
     return (
       <div className="app">
-        <Provider store={getStore()}>
+        <Provider store={store}>
           <Router location={ctx.url} context={{}}>
             <Header></Header>
-            {routes()}
+            {routes.map(route => (
+              <Route {...route}></Route>
+            ))}
           </Router>
         </Provider>
       </div>
@@ -33,6 +34,9 @@ export function render(ctx) {
   </head>
   <body>
   <div id="root">${content}</div>
+  <script>
+    window.context = ${JSON.stringify(store.getState())} 
+  </script>
   <script src="/app.client.bundle.js"></script></body>
   </html> 
   `
