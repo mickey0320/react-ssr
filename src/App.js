@@ -2,8 +2,9 @@ import React from "react"
 import { renderRoutes } from "react-router-config"
 
 import Header from "./components/Header"
+import { isLogin } from "./components/Header/store"
 
-export default function App(props) {
+function App(props) {
   return (
     <div className="app">
       <Header></Header>
@@ -11,3 +12,9 @@ export default function App(props) {
     </div>
   )
 }
+
+App.loadData = function(store) {
+  return store.dispatch(isLogin())
+}
+
+export default App

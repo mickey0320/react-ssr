@@ -14,8 +14,6 @@ export function getHomeList() {
       .then(res => {
         return dispatch(changeNewList(res.data.data))
       })
-      .catch(res => {
-        console.log(res)
-      })
+      .catch(res => {})
   }
 }

@@ -1,11 +1,36 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
+import { connect } from "react-redux"
 
-export default () => {
+import { login, logout } from "./store"
+
+function Header(props) {
   return (
     <div className="head">
       <Link to="/">首页&nbsp;&nbsp;</Link>
-      <Link to="/login">登录</Link>
+      {props.logined ? (
+        <Fragment>
+          <span onClick={props.logout}>退出&nbsp;&nbsp;</span>
+          <span>翻译列表</span>
+        </Fragment>
+      ) : (
+        <span onClick={props.login}>登录</span>
+      )}
     </div>
   )
 }
+
+const mapStateToProps = state => ({
+  logined: state.header.logined
+})
+
+const mapDispatchToProps = dispatch => ({
+  login() {
+    dispatch(login())
+  },
+  logout() {
+    dispatch(logout())
+  }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

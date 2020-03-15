@@ -8,11 +8,11 @@ import { render } from "./utils"
 import routes from "../routes"
 import { getStore } from "../store"
 
-const store = getStore()
 const app = new Koa()
 const router = new koaRouter()
 
 router.get("*", async ctx => {
+  const store = getStore(ctx)
   const matchedRoutes = matchRoutes(routes, ctx.path)
   const promises = []
   matchedRoutes.forEach(item => {
