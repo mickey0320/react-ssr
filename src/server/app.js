@@ -16,7 +16,9 @@ router.get("*", async ctx => {
   const matchedRoutes = matchRoutes(routes, ctx.path)
   const promises = []
   matchedRoutes.forEach(item => {
-    promises.push(item.route.loadData(store))
+    if (item.route.loadData) {
+      promises.push(item.route.loadData(store))
+    }
   })
   await Promise.all(promises)
   ctx.body = render(ctx, store)

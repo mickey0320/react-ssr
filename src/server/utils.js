@@ -2,23 +2,18 @@ import React from "react"
 import { renderToString } from "react-dom/server"
 import { StaticRouter as Router, Route } from "react-router-dom"
 import { Provider } from "react-redux"
+import { renderRoutes } from "react-router-config"
 
 import routes from "../routes"
-import Header from "../components/Header"
 
 export function render(ctx, store) {
   function App() {
     return (
-      <div className="app">
-        <Provider store={store}>
-          <Router location={ctx.url} context={{}}>
-            <Header></Header>
-            {routes.map(route => (
-              <Route {...route}></Route>
-            ))}
-          </Router>
-        </Provider>
-      </div>
+      <Provider store={store}>
+        <Router location={ctx.url} context={{}}>
+          {renderRoutes(routes)}
+        </Router>
+      </Provider>
     )
   }
   const content = renderToString(<App />)
