@@ -6,11 +6,11 @@ import { renderRoutes } from "react-router-config"
 
 import routes from "../routes"
 
-export function render(ctx, store) {
+export function render(ctx, store, context) {
   function App() {
     return (
       <Provider store={store}>
-        <Router location={ctx.url} context={{}}>
+        <Router location={ctx.url} context={context}>
           {renderRoutes(routes)}
         </Router>
       </Provider>

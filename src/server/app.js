@@ -4,7 +4,7 @@ import koaStatic from "koa-static"
 import proxy from "koa2-proxy-middleware"
 import { matchRoutes } from "react-router-config"
 
-import { render } from "./utils"
+import { render } from "./render"
 import routes from "../routes"
 import { getStore } from "../store"
 
@@ -15,6 +15,7 @@ router.get("*", async ctx => {
   const store = getStore(ctx)
   const matchedRoutes = matchRoutes(routes, ctx.path)
   const promises = []
+  const context = {}
   matchedRoutes.forEach(item => {
     if (item.route.loadData) {
       promises.push(item.route.loadData(store))
@@ -24,7 +25,12 @@ router.get("*", async ctx => {
     }
   })
   await Promise.all(promises)
-  ctx.body = render(ctx, store)
+  const html = render(ctx, store, context)
+  if (context.action === "REPLACE") {
+    ctx.redirect(context.url)
+    return
+  }
+  ctx.body = html
 })
 
 app.use(

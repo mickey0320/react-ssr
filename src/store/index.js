@@ -3,12 +3,14 @@ import thunk from "redux-thunk"
 
 import { homeReducer } from "../containers/Home/store"
 import { headerReducer } from "../components/Header/store"
+import { translationReducer } from "../containers/Translation/store"
 import clientAxios from "../client/axios"
 import serverAxios from "../server/axios"
 
 const reducer = {
   home: homeReducer,
-  header: headerReducer
+  header: headerReducer,
+  translation: translationReducer
 }
 
 function getStore(ctx) {

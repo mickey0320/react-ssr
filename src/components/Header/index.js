@@ -11,7 +11,7 @@ function Header(props) {
       {props.logined ? (
         <Fragment>
           <span onClick={props.logout}>退出&nbsp;&nbsp;</span>
-          <span>翻译列表</span>
+          <Link to="/translation">翻译列表</Link>
         </Fragment>
       ) : (
         <span onClick={props.login}>登录</span>
