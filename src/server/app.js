@@ -19,6 +19,9 @@ router.get("*", async ctx => {
     if (item.route.loadData) {
       promises.push(item.route.loadData(store))
     }
+    if (item.route.key === "notfound") {
+      ctx.status = 404
+    }
   })
   await Promise.all(promises)
   ctx.body = render(ctx, store)

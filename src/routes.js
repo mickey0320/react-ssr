@@ -1,6 +1,7 @@
 import App from "./App"
 import Home from "./containers/Home"
 import Login from "./containers/Login"
+import NotFound from "./containers/NotFound"
 
 export default [
   {
@@ -21,6 +22,10 @@ export default [
         component: Login,
         exact: true,
         loadData: Home.loadData
+      },
+      {
+        key: "notfound",
+        component: NotFound
       }
     ]
   }
